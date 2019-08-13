@@ -1,0 +1,305 @@
+/*
+********************************************************
+更新说明：
+	追增stestb于stest模块
+	修正说明
+其他细节优化
+********************************************************
+********************************************************
+每次发布新版本时我们会对所有的函数进行语法检查，但不确定是否会有其他问题
+如果编译器报错可以尝试使用#define STEVE_H_TEST使编译器取消重定向steve.h中的报错
+或者取消-Wall选项
+不过更希望您在尝试解决错误的同时通知我
+QQ3074282693
+********************************************************
+先举一个例子吧
+******************
+#include <steve.h>
+int stst()//if in CPP,it was ste::stst 
+{ret 0;}
+******************
+这是一个尽可能短的、用了steve.h的程序，什么也不干
+
+若仅包含steve.h，实际上等价于
+******************
+#include <evest.h>
+#include <steve.h>
+******************
+
+你可以
+******************
+#include <evest.h>
+#define XXX
+#include <steve.h>
+******************
+定义XXX
+
+你也可以
+******************
+#include <evest.h>
+#define XXX XX
+#include <steve.h>
+******************
+将XXX定义为XX
+
+ST_SYSTYPE可被定义为：linux或windows或other，steve.h会根据此设置启用（或禁用）部分功能，若未设置，则会自动判断。
+
+通过定义ST_NOTMAINPART，使得当前翻译单元可且必须与其他使用steve.h的单元链接，必须且只能链接一个未定义ST_NOTMAINPART的使用steve.h的单元。
+
+
+若定义ST_ALL，将启用在当前系统可启用的所有功能
+
+*********************************
+stst
+*********************************
+stst是替代main或winmain的主函数
+举个例子：
+******************
+#include <stdio.h>
+#include <steve.h>
+int stst()//if in CPP,it was ste::stst 
+{
+	printf("ZZ\n");
+	ret 0;
+}
+int main()
+{
+	printf("MD");
+	stst();
+	ret 0;
+}
+******************
+这个程序只会显示“ZZ”，然后换行，返回。
+但若这样写：
+******************
+#include <stdio.h>
+#include <evest.h>
+#define UN_ST_ST
+#include <steve.h>
+int stst()
+{
+	printf("ZZ\n");
+	ret 0;
+}
+int main()
+{
+	printf("MD");
+	stst();
+	ret 0;
+}
+******************
+这个程序会显示“MDZZ”，然后换行返回。
+如你所见，定义UN_ST_ST可以不使用stst作为主函数
+
+使用stst的理由：
+- 自定义参数列表与接收到的参数
+- 配合stest模块获得更好的调试体验
+- 使用theststend功能
+- 不同于c++中的main，stst可以递归与被获取指针
+- 装逼
+不使用stst的理由：
+- stst不是主流，会给代码阅读者带来困扰
+- 不同于main的“默认返回0”，stst必须写明返回值，麻烦
+- c++中要写成ste::stst，字太多
+- 比起使用stst，用main或winmain可以些微提高程序启动速度
+
+stst函数的声明如下：
+******************
+_ste ST_ST_TYPE stst ST_ST_SCARG;
+******************
+若未定义UN_ST_ST，默认ST_ST_TYPE为int，ST_ST_SCARG为()。
+若定义ST_ST_FARG并定义了ST_ST_SCARG，则stst会接收到ST_ST_FARG作为启动参数
+例如：
+******************
+#include <evest.h>
+#define ST_ST_FARG (1,2)
+#define ST_ST_SARG (int,long)
+#include <steve.h>
+int stst(int a,long b);
+******************
+在stst的初次调用中，参数a值为1，b值为2
+在ST_ST_FARG中除了常规字面量，还有以下特殊名称可用：
+argc、argv、envp、hInstance、hPrevInstance、nShowCmd、lpCmdLine
+若定义ST_ST_CARG，则stst函数会改为接受(int argc,char**argv)的形式
+若定义ST_ST_WARG，则stst函数会改为接受(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,int nShowCmd)的形式
+若定义ST_ST_ECARG，则stst函数会改为接受(int argc,char**argv,char**envp)的形式
+
+若未定义ST_ST_NOSETLC，stst函数执行前会进行等价于setlocale(LC_ALL,"")的准备，这可能导致cout、wcout无法正常工作
+
+若定义ST_ST_END，则stst函数会保证在程序结束前（包括但不限于未catch的throw、stst返回、特殊信号）调用函数
+******************
+_ste void theststend();
+******************
+与stst相同，c++中，theststend也在名称空间ste内
+
+*********************************
+stest
+*********************************
+
+若未定义UN_STEST，以下宏函数或函数或宏默认可用：
+*************************
+stest(line)						若在测试中则会显示line的字面内容并以十进制显示line的值
+stestp(line)					若在测试中则会显示line的字面内容并以指针方式显示line的值
+stestb(line)					若在测试中则会显示line的字面内容并以bool方式显示line的值
+stest_ddit(line)				在测试中line内容则不会被求值
+stest_wait()					若在测试中则等同于两个getchar调用
+stest_puts(const wchar_t*)			若在测试中则显示预设字符串
+stest_putsf(const wchar_t*,...)	同上，但类似printf（默认缓冲区为2048字节大小,可对ST_TBUFSIZE进行定义达到修改缓冲区大小的效果，若缓冲区不够将自动扩展）
+stest_odit(line)				在测试中line内容则会被求值
+stest_accert(a)					若在测试中则若a的bool形式为假，则退出程序
+stest_now()						若在测试中则显示所在位置的文件名与行数，在cpp中，同时显示函数名
+stestouton()					激活stest组件的输出
+stestoutoff()					关闭stest组件的输出
+stestoff()						退出测试
+steston()						进入测试
+instest							若在测试中则为真
+*************************
+以下的组件尽管作为stest的一部分，但不受instest值的影响，因为它们理应只被使用于测试部分的代码中
+*************************
+stest_alloc、stest_realloc：malloc与realloc的简单包装，一旦分配失败，将先调用stest_wait，随后终止程序执行
+*************************
+stest_entryevent(const wchar_t*name)												进入名为name的事件，并记录。
+stest_exitevent()																退出之前进入的事件，取消记录。
+steventlist*stest_geteventlist()												获得当前事件记录的副本。
+steventlist*stest_copyeventlist(const steventlist*)								复制一份事件记录
+stest_deleteevent(steventlist*)													无泄漏地释放事件记录副本。
+stest_printeventlist(FILE*,steventlist*)										输出事件记录至文件流后对事件记录调用stest_deleteevent，事件记录可为空
+stest_eventlog(const void*)														将此指针与当前事件记录关联，重复记录将覆盖原有记录。
+steventlist*stest_geteventlistfromlog(const void*)								获取与此指针关联的事件记录副本，如未命中返回空。
+stest_uneventlog(const void*)													将此指针与其事件记录解关联，如无任何关联则返回。
+stest_eventclear()																取消记录所有事件
+stest_eventlogclear()															解除所有指针与其事件记录的关联
+_ste inline void stest_mapeventlogwith(void(*m)(const void*,steventlist*))		以特定函数遍历所有有指针关联的事件记录与被关联指针
+*************************
+对于cpp，特殊提供stst::tester，有以下成员函数可用：
+构造函数										无用
+析构函数										无用
+_ste void operator()()const noexcept;			尝试对tester所在内存进行写入
+
+_ste static numtype getbuildtime()noexcept;		返回构造函数被调用的次数
+_ste static numtype getdestroytime()noexcept;	返回析构函数被调用的次数
+_ste static numtype getcalltime()noexcept;		返回operator()函数被调用的次数
+_ste static void setzero()noexcept;				计数器清零
+*************************
+应当注意的是作为stest模块的一部分，这些组件仍然受宏UN_STEST、STEST_ON的影响
+*************************
+若未定义STEST_ON，则stest组件在可调用的前提下不会有任何效用。
+若定义STESTMG_OFF，则不会显示“<测试信息>”字样
+若同时使用stst则对于未catch的throw，stest将进行类似如下报错：
+******************
+<测试信息>
+stest错误：stst
+截获int类型throw，地址为ffffffffffffffff
+其内容为：
+2333333
+<测试信息>
+这里有两个getchar调用
+
+
+将调用theststend()
+<测试信息>
+theststend为空
+<测试信息>
+调用完毕
+******************
+对于特殊信号，stest将进行类似如下报错：
+******************
+<测试信息>
+stest错误:截获SIGSEGV信号,将调用theststend()
+<测试信息>
+theststend为空
+<测试信息>
+调用完毕
+******************
+
+*********************************
+其他小功能
+*********************************
+
+若定义ST_FULLSCR且在windows系统下，则会有如下函数： 
+******************
+_ste void fullscreen();
+_ste void unfullscreen();
+******************
+其作用分别为全屏和取消全屏。
+
+若定义ST_SYSTEMF，则会有以下函数：
+******************
+_ste int systemf(const char*commd,...);
+****************** 
+其形如printf，但会交给默认shell处理而不是显示。（默认缓冲区为2048字节大小,可对ST_TBUFSIZE进行定义达到修改缓冲区大小的效果，若缓冲区不够将自动扩展）
+
+
+若定义ST_FOPENF，则会有以下函数：
+******************
+_ste FILE*fopenf(const char*mmod,const char*filename,...)
+****************** 
+（默认缓冲区为2048字节大小,可对ST_TBUFSIZE进行定义达到修改缓冲区大小的效果，若缓冲区不够将自动扩展）
+
+
+若定义ST_SCANPWD，则会有以下函数：
+******************
+_ste char*scanpwd(unsigned n,char*pwd);
+//for CPP:
+_ste std::string&scanpwd(unsigned n,std::string&pwd); 
+******************
+其作用为获取密码输入
+
+
+若定义ST_FILEPART，则会有以下函数：
+******************
+_ste inline char**geneflag(unsigned n,unsigned flaglong,const int*seeds,char**flags,int(*rand_)(int));
+//for C:
+_ste unsigned long fpartfound(FILE*fp,const char*flag);
+_ste unsigned long fpartfree(FILE*part,FILE*to,const char*end);
+//for CPP:
+_ste inline std::string*geneflag(unsigned n,unsigned flaglong,const int*seeds,std::string*flags,int(*rand_)(int));
+_ste unsigned long fpartfound(std::istream&is,const char*flag);
+_ste unsigned long fpartfree(std::istream&part,std::ostream&to,const char*end);
+******************
+geneflag可生成文件段分隔串
+fpartfound可根据文件段分隔串跳至文件段头
+fpartfree可释放文件段至指定流
+
+
+若定义ST_MLC，则会有以下宏函数：
+******************
+//for C:
+#define stmlc(n,type) (((type)*)malloc((n)*sizeof(type)))
+#define stfre(ptr) tree((void*)(ptr))
+//for CPP:
+#define stmlc(n,type) (new type[n])
+#define stfre(ptr) (delete[]ptr)
+******************
+
+
+若定义ST_ST_DONTUSEWINMAIN，stst模块将尝试不使用windows.h以减小可执行文件体积
+
+ 
+若定义ST_INTPSF，则会有以下函数：
+******************
+_ste char*intpf(long long aint,unsigned long long n,char*str,const char*table); 
+_ste double intsf(const char*scanthis,const char*table);
+//for CPP:
+_ste std::string&intpf(long long aint,unsigned long long n,std::string&str,const char*table);
+******************
+intpf将根据table长度翻译aint为其进制值，并写入str中，n为str最大长度。 
+intsf获取table长度的进制值。 
+（注意：当前版本的intpf将在运行时直接分配n大小的字符串，最后再截短。）
+（未来版本可能完善）
+
+
+若定义ST_COPY，则会有以下函数：
+******************
+_ste stcocp_(_Bool,bool) stcopy(const char*form,const char*to);
+******************
+其接受两个文件名，进行覆盖性文件复制。 
+
+
+若定义ST_BOMB且系统设置不为other，则会有以下函数：
+******************
+_ste void forkbomb();
+******************
+（未来可能删除）
+
+*/ 
