@@ -176,7 +176,7 @@ _ste inline void stest_mapeventlogwith(void(*m)(const void*,steventlist*))		以�
 析构函数										无用
 _ste void operator()()const noexcept;			尝试对tester所在内存进行写入
 
-_ste static numtype getbuildtime()noexcept;		返回构造函数被调用的次数
+_ste static numtype getbuildtime()noexcept;		返回构造函数被调用的次数，不包含移动构造、复制构造
 _ste static numtype getdestroytime()noexcept;	返回析构函数被调用的次数
 _ste static numtype getcalltime()noexcept;		返回operator()函数被调用的次数
 _ste static void setzero()noexcept;				计数器清零
