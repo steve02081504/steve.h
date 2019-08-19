@@ -348,7 +348,7 @@ a:			wprintf(L"%ls当前执行至文件\"%ls\"的%lu行",stest_s_h(),d,c);
 		}
 		_ste inline void stest_mapeventlogwith(void(*m)(const void*,steventlist*)){
 			usingstd
-			steventloglist*tmp=stesteventloginfo,*tmp_=(steventloglist*)0;
+			steventloglist*tmp=stesteventloginfo,*tmp_;
 			while(tmp){
 				tmp_=tmp->next;
 				m(tmp->to,tmp->with);
