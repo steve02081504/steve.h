@@ -14,6 +14,7 @@
 #if !defined(UN_STEST)&&!defined(STEST_ED)
 	#if !defined(STEST_OFF)
 		#include steio//io
+		#include echar//wprintf
 		#include stearg//vswprintf
 		#include stelib//many
 		#include sterrno//errno
