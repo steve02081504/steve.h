@@ -42,7 +42,6 @@
 	#define estring <cstring>
 	#define esignal <csignal>
 	#define steio <cstdio>
-	#define echar <cwchar>
 	#define cocpio <iostream>
 	#define sterrno <cerrno>
 	#define etype <cctype>
@@ -70,7 +69,6 @@
 	#define estring <string.h>
 	#define esignal <signal.h>
 	#define steio <stdio.h>
-	#define echar <wchar.h>
 	#define cocpio <stdio.h>
 	#if defined(errno)
 		#define sterrno <voidfile>

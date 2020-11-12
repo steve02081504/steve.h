@@ -40,7 +40,6 @@
 #undef estring
 #undef esignal
 #undef steio
-#undef echar
 #undef cocpio
 #undef etype
 #undef emlc

@@ -51,7 +51,6 @@
 	#endif
 	#if !defined(STEST_OFF)
 		#include steio
-		#include echar
 		#if ST_CPP
 			#include <exception>
 		#endif
@@ -60,7 +59,6 @@
 		//#define st_signal(sl) case(sl):fwprintf(stderr,L"%lsstest错误:截获%ls(%ls)信号,将调用theststend()\n",stest_s_h(),L"" #sl,strsignal(sl));goto a;
 		#define st_signal(sl) case(sl):fwprintf(stderr,L"%lsstest错误:截获%ls信号,将调用theststend()\n",stest_s_h(),L"" #sl);goto a;
 		#include steio
-		#include echar
 		#include stelib
 		#include esignal
 		nesebg
