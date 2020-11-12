@@ -45,6 +45,7 @@
 #undef emlc
 #undef emath
 #undef elocale
+#undef ewchar
 #undef sterrno
 #undef usingstd
 #undef usingste

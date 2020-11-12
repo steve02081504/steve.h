@@ -22,6 +22,8 @@
 #define ST_BLOCKNOTENESTABLE (/*/*/0*/**/1)
 #define ST_EVE_ST_ED
 //
+#include "steve/setting.txt"
+//
 #if ST_CPP
 	inline namespace ste{}
 	#define nesebg namespace ste{
@@ -49,6 +51,7 @@
 	#define emlc <voidfile>
 	#define emath <cmath>
 	#define elocale <clocale>
+	#define ewchar <cwchar>
 #else
 	#define nesebg
 	#define neseed
@@ -79,9 +82,8 @@
 	#define emlc <stdlib.h>
 	#define emath <math.h>
 	#define elocale <locale.h>
+	#define ewchar <wchar.h>
 #endif
-//
-#include "steve/setting.txt"
 //
 #define _ste
 #define _al

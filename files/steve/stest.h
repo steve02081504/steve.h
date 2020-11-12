@@ -12,12 +12,13 @@
 #endif
 //
 #if !defined(UN_STEST)&&!defined(STEST_ED)
-	#if defined(STEST_ON)
+	#if !defined(STEST_OFF)
 		#include steio//io
 		#include stearg//vswprintf
 		#include stelib//many
 		#include sterrno//errno
 		#include estring//strerror
+		#include ewchar//wprintf
 		nesebg
 		#if ST_CPP
 			_ste inline bool stestout=1,stestser=0,instest=1;

@@ -15,8 +15,7 @@ QQ3074282693
 先举一个例子吧
 ******************
 #include <steve.h>
-int stst()//if in CPP,it was ste::stst 
-{ret 0;}
+void stst(){}//if in CPP,it was ste::stst 
 ******************
 这是一个尽可能短的、用了steve.h的程序，什么也不干
 
@@ -57,10 +56,9 @@ stst是替代main或winmain的主函数
 ******************
 #include <stdio.h>
 #include <steve.h>
-int stst()//if in CPP,it was ste::stst 
+void stst()//if in CPP,it was ste::stst 
 {
 	printf("ZZ\n");
-	ret 0;
 }
 int main()
 {
@@ -76,10 +74,9 @@ int main()
 #include <evest.h>
 #define UN_ST_ST
 #include <steve.h>
-int stst()
+void stst()
 {
 	printf("ZZ\n");
-	ret 0;
 }
 int main()
 {
@@ -99,7 +96,6 @@ int main()
 - 装逼
 不使用stst的理由：
 - stst不是主流，会给代码阅读者带来困扰
-- 不同于main的“默认返回0”，stst必须写明返回值，麻烦
 - c++中要写成ste::stst，字太多
 - 比起使用stst，用main或winmain可以些微提高程序启动速度
 
@@ -107,7 +103,7 @@ stst函数的声明如下：
 ******************
 _ste ST_ST_TYPE stst ST_ST_SCARG;
 ******************
-若未定义UN_ST_ST，默认ST_ST_TYPE为int，ST_ST_SCARG为()。
+若未定义UN_ST_ST，默认ST_ST_TYPE为void，ST_ST_SCARG为()。
 若定义ST_ST_FARG并定义了ST_ST_SCARG，则stst会接收到ST_ST_FARG作为启动参数
 例如：
 ******************
@@ -130,7 +126,7 @@ argc、argv、envp、hInstance、hPrevInstance、nShowCmd、lpCmdLine
 ******************
 _ste void theststend();
 ******************
-与stst相同，c++中，theststend也在名称空间ste内
+与stst相同，c++中，theststend也在内联名称空间ste内
 
 *********************************
 stest
@@ -181,9 +177,9 @@ _ste static numtype getdestroytime()noexcept;	返回析构函数被调用的次�
 _ste static numtype getcalltime()noexcept;		返回operator()函数被调用的次数
 _ste static void setzero()noexcept;				计数器清零
 *************************
-应当注意的是作为stest模块的一部分，这些组件仍然受宏UN_STEST、STEST_ON的影响
+应当注意的是作为stest模块的一部分，这些组件仍然受宏UN_STEST、STEST_OFF的影响
 *************************
-若未定义STEST_ON，则stest组件在可调用的前提下不会有任何效用。
+若定义STEST_OFF，则stest组件在可调用的前提下不会有任何效用。
 若定义STESTMG_OFF，则不会显示“<测试信息>”字样
 若同时使用stst则对于未catch的throw，stest将进行类似如下报错：
 ******************

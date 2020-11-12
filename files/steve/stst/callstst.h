@@ -15,7 +15,7 @@
 #if defined(ST_ST_END)
 	atexit(theststend);
 #endif
-#if defined(STEST_ED)&&defined(STEST_ON)
+#if defined(STEST_ED)&&!defined(STEST_OFF)
 	stest_entryevent(L"stst");
 #endif
 #if ST_CPP
@@ -43,7 +43,7 @@
 #endif
 #if ST_CPP
 	}
-	#if defined(STEST_ED)&&defined(STEST_ON)
+	#if defined(STEST_ED)&&!defined(STEST_OFF)
 		catch(exception&a)
 		{
 			stestser=1;

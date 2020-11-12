@@ -1,5 +1,5 @@
 nesebg
-#if defined(STEST_ON)
+#if !defined(STEST_OFF)
 	_ste struct tester{
 		typedef unsigned long a;
 		_ste inline static a b=0,c=0,d=0;

@@ -43,12 +43,13 @@
 	#endif
 	//
 	#if !defined(ST_ST_TYPE)
-		#define ST_ST_TYPE int
+		#define ST_ST_TYPE void
+		#define _isVOID
 	#endif
 	#if !defined(ST_ST_NOSETLC)
 		#include elocale
 	#endif
-	#if defined(STEST_ON)
+	#if !defined(STEST_OFF)
 		#include steio
 		#if ST_CPP
 			#include <exception>
@@ -68,7 +69,7 @@
 			#if !defined(UN_STEST)
 				stestser=1;
 			#endif
-			#if defined(STEST_ON)
+			#if !defined(STEST_OFF)
 				switch(a)
 				{
 					#include "ststsignal.h"
@@ -79,7 +80,7 @@
 				a:
 			#endif
 			theststend();
-			#if defined(STEST_ON)
+			#if !defined(STEST_OFF)
 				fwprintf(stderr,L"%ls调用完毕",stest_s_h());
 			#endif
 			fflush(0);
