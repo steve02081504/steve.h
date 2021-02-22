@@ -111,7 +111,7 @@ _ste ST_ST_TYPE stst ST_ST_SCARG;
 #define ST_ST_FARG (1,2)
 #define ST_ST_SARG (int,long)
 #include <steve.h>
-int stst(int a,long b);
+void stst(int a,long b);
 ******************
 在stst的初次调用中，参数a值为1，b值为2
 在ST_ST_FARG中除了常规字面量，还有以下特殊名称可用：
