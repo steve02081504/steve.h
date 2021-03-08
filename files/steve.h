@@ -48,21 +48,25 @@
 	#undef min
 	//fucking shit windows.h
 
-    #undef floop
-    #undef ret
-    #define floop for(;;)
-    #define nul ((char)0)
-    #define ret return
-    #include stebool
-    #include elimits
-    #include efolat
-    #include emath
-    #if (!ST_CPP)
-        #include <stdalign.h>// defined(__STDC__VERSION__)&&__STDC_VERSION__>=201112L   need
+	#undef floop
+	#undef ret
+	#undef NULL
+	#define floop for(;;)
+	#define NUL ((char)0)
+	#define nul ((char)0)
+	#define ret return
+	#include stebool
+	#include elimits
+	#include efolat
+	#include emath
+	#if (!ST_CPP)
+		#include <stdalign.h>// defined(__STDC__VERSION__)&&__STDC_VERSION__>=201112L   need
+		#define NULL ((void*)0)
 		#define null ((void*)0)
 	#else
+		#define NULL nullptr
 		#define null nullptr
-    #endif
+	#endif
 #endif
 //
 #include "steve/undefs.h"
