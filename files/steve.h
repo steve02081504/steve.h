@@ -48,9 +48,6 @@
 	#undef min
 	//fucking shit windows.h
 
-	#undef floop
-	#undef ret
-	#undef NULL
 	#define floop for(;;)
 	#define NUL ((char)0)
 	#define nul ((char)0)
@@ -59,6 +56,9 @@
 	#include elimits
 	#include efolat
 	#include emath
+	#undef floop
+	#undef ret
+	#undef NULL
 	#if (!ST_CPP)
 		#include <stdalign.h>// defined(__STDC__VERSION__)&&__STDC_VERSION__>=201112L   need
 		#define NULL ((void*)0)
