@@ -359,6 +359,7 @@ a:			wprintf(L"%ls当前执行至文件\"%ls\"的%lu行",stest_s_h(),d,c);
 		neseed
 	#else
 		#include steio
+		#include stelib//malloc
 		#define stest(...) ((long long)(__VA_ARGS__))
 		#define stestp(...) ((void*)(__VA_ARGS__))
 		#define stestb(...) ((stbool)(__VA_ARGS__))
