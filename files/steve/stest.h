@@ -346,6 +346,7 @@ a:			wprintf(L"%ls当前执行至文件\"%ls\"的%lu行",stest_s_h(),d,c);
 				free(tmp);
 				tmp=tmp_;
 			}
+			stesteventloginfo=0;
 		}
 		_ste inline void stest_mapeventlogwith(void(*m)(const void*,steventlist*)){
 			usingstd
