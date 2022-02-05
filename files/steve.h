@@ -18,7 +18,7 @@
 #endif
 //
 #if !defined(ST_SYSTYPE)
-	#if defined(WIN32)||defined(_WIN32)||defined(_WIN64)||defined(WIN64)||defined(_WIN128)||defined(WIN128)||defined(_WIN256)||defined(WIN256)//wdnmd
+	#if defined(_WIN32)
 		#define ST_SYSTYPE windows
 	#elif defined(__linux)||defined(__linux__)||defined(__gnu_linux__)
 		#define ST_SYSTYPE linux
