@@ -7,8 +7,8 @@ nesebg
 		_ste static a getdestroytime()noexcept{return c;}
 		_ste static a getcalltime()noexcept{return d;}
 		_ste static void setzero()noexcept{b=c=d=0;}
-		_ste tester(){b++;}
-		_ste ~tester(){c++;}
+		_ste tester()noexcept{b++;}
+		_ste ~tester()noexcept{c++;}
 		_ste void operator()()const noexcept{*((char*)this)=(char)d++;}
 	};
 	static_assert(sizeof(tester)>=sizeof(char));
@@ -19,8 +19,8 @@ nesebg
 		_ste static a getdestroytime()noexcept{return 0;}
 		_ste static a getcalltime()noexcept{return 0;}
 		_ste static void settimeszero()noexcept{}
-		_ste tester(){}
-		_ste ~tester(){}
+		_ste tester()noexcept{}
+		_ste ~tester()noexcept{}
 		_ste void operator()()const noexcept{}
 	};
 #endif

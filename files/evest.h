@@ -28,6 +28,7 @@
 	inline namespace ste{}
 	#define nesebg namespace ste{
 	#define neseed }
+	#define nexc noexcept
 
 	#define stcocp(cline,cppline) (cppline)
 	#define stcocp_(cline,cppline) cppline 
@@ -55,6 +56,7 @@
 #else
 	#define nesebg
 	#define neseed
+	#define nexc
 
 	#define stcocp(cline,cppline) (cline)
 	#define stcocp_(cline,cppline) cline 
@@ -83,6 +85,27 @@
 	#define emath <math.h>
 	#define elocale <locale.h>
 	#define ewchar <wchar.h>
+#endif
+//
+#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4099)//class与struct混用警告diss
+	#pragma warning(disable:26812)//enum class安利diss.
+	#pragma warning(disable:4584)//重复子类警告diss
+	#pragma warning(disable:4250)//域控制继承警告diss
+	#pragma warning(disable:26432)//不完全默认方法警告diss
+	#pragma warning(disable:26435)//virtual override方法警告diss
+	#pragma warning(disable:26481)//容器安利diss
+	#pragma warning(disable:26446)//gsl::at安利diss
+	#pragma warning(disable:26434)//方法覆盖警告diss
+	#pragma warning(disable:26429)//gsl::not_null安利diss
+	#pragma warning(disable:26471)//对void*进行static_cast安利diss
+	#pragma warning(disable:26493)//c风格cast警告diss
+	#pragma warning(disable:26438)//goto警告diss
+	#pragma warning(disable:26408)//new\delete安利diss
+	#pragma warning(disable:26492)//const_cast警告diss
+	#pragma warning(disable:26462)//非const分配警告diss
+	#pragma warning(disable:26496)//const标记警告diss
 #endif
 //
 #define _ste

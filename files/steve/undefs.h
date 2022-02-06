@@ -1,5 +1,9 @@
 //undefs.h
 //
+#if defined(_MSC_VER) && defined(void)
+	#pragma warning(pop)
+#endif
+//
 #undef void
 #undef linux
 #undef windows
@@ -32,6 +36,7 @@
 #undef aline
 #undef nesebg
 #undef neseed
+#undef nexc
 #undef stelib
 #undef stearg
 #undef efolat

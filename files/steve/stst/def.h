@@ -62,8 +62,8 @@
 		#include stelib
 		#include esignal
 		nesebg
-		_ste void theststend();
-		_ste inline void theststend_(int a)
+		_ste void theststend()nexc;
+		_ste inline void theststend_(int a)nexc
 		{
 			usingstd
 			#if !defined(UN_STEST)
