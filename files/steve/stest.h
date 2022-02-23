@@ -161,10 +161,17 @@
 			#endif
 	a:		b*=2;
 			a=(wchar_t*)stest_realloc(a,b*sizeof(wchar_t));
+			#if defined(_MSC_VER)
+				#pragma warning(push)
+				#pragma warning(disable:26826)//c变参警告diss
+			#endif
 			va_list argptr;
 			va_start(argptr,message);
 			c=vswprintf(a,b,message,argptr);
 			va_end(argptr);
+			#if defined(_MSC_VER)
+				#pragma warning(pop)
+			#endif
 			if(c<0)goto a;
 			stest_puts(a);
 			free(a);
