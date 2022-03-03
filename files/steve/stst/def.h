@@ -92,52 +92,56 @@
 	nesebg
 	_ste ST_ST_TYPE stst ST_ST_SCARG;
 	neseed
-	#if ST_SYSTYPE==windows&&!defined(ST_ST_DONTUSEWINMAIN)&&!defined(ST_NOTMAINPART)
-		#include <windows.h>
-		int WINAPI WinMain
-		#
-		(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,int nShowCmd)
-		{
-			usingstd
-			usingste
-			#if defined(ST_ST_CARG)||defined(ST_ST_FARG)||defined(ST_ST_ECARG)
-				int argc=0;
-				while(((char**)lpCmdLine)[argc])argc++;
-				char**argv=(char**)lpCmdLine,**envp=(char**)0;
-			#endif
-			//
-			#include"callstst.h"
-		}
-		#define x4d61696e _don_t_do_next__
-		#define _WinMain x4d61696e
-		#define WinMain _WinMain
-	#endif
 	#if !defined(ST_NOTMAINPART)
-		int main
-		#
-		(
-		#if defined(ST_ST_WARG)||defined(ST_ST_CARG)||defined(ST_ST_FARG)||defined(ST_ST_ECARG)
-		int argc,char**argv
-		#endif
-		#if defined(ST_ST_ECARG)
-		,char**envp
-		#endif
-		)
-		#
-		{
-			usingstd
-			usingste
+		#if ST_SYSTYPE==windows&&defined(_WINMAIN_)
+			#include <windows.h>
+			int WINAPI WinMain
+			#
+			(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,int nShowCmd)
+			{
+				usingstd
+				usingste
+				#if defined(ST_ST_CARG)||defined(ST_ST_FARG)||defined(ST_ST_ECARG)
+					int argc=0;
+					while(((char**)lpCmdLine)[argc])argc++;
+					char**argv=(char**)lpCmdLine,**envp=(char**)0;
+				#endif
+				//
+				#include"callstst.h"
+			}
+			#define x6d61696e _don_t_do_next__
+			#define _WinMain x6d61696e
+			#define WinMain _WinMain
+		#else
 			#if (defined(ST_ST_WARG)||defined(ST_ST_FARG))&&ST_SYSTYPE==windows
-				HINSTANCE hInstance=GetModuleHandle((LPCTSTR)((void*)0)),hPrevInstance=(HINSTANCE)0;
-				LPSTR lpCmdLine=(LPSTR)argv;
-				int nShowCmd=0;
+				#include <windows.h>
 			#endif
-			//
-			#include"callstst.h"
-		}
-		#define x6d61696e _don_t_do_next_
-		#define _main x6d61696e
-		#define main _main
+			int main
+			#
+			(
+			#if defined(ST_ST_WARG)||defined(ST_ST_CARG)||defined(ST_ST_FARG)||defined(ST_ST_ECARG)
+			int argc,char**argv
+			#endif
+			#if defined(ST_ST_ECARG)
+			,char**envp
+			#endif
+			)
+			#
+			{
+				usingstd
+				usingste
+				#if (defined(ST_ST_WARG)||defined(ST_ST_FARG))&&ST_SYSTYPE==windows
+					HINSTANCE hInstance=GetModuleHandle((LPCTSTR)((void*)0)),hPrevInstance=(HINSTANCE)0;
+					LPSTR lpCmdLine=(LPSTR)argv;
+					int nShowCmd=0;
+				#endif
+				//
+				#include"callstst.h"
+			}
+			#define x6d61696e _don_t_do_next_
+			#define _main x6d61696e
+			#define main _main
+		#endif
 	#endif
 	#define ST_ST_ED
 	//
