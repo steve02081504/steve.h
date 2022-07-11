@@ -143,7 +143,7 @@
 			fflush(stdout);
 		}
 		#if defined(__GNUC__)
-		_ste inline int stest_putsf(const wchar_t*message,...)__attribute__((format(wprintf,1,2)))nexc;
+		_ste inline int stest_putsf(const wchar_t*message,...)nexc __attribute__((format(wprintf,1,2)));
 		#endif
 		_ste inline int stest_putsf(const wchar_t*message,...)nexc
 		{

@@ -18,7 +18,7 @@
 #endif
 //
 #if !defined(ST_SYSTYPE)
-	#if defined(_WIN32)
+	#if defined(_WIN32)||defined(__MINGW32__)||defined(__CYGWIN__)
 		#define ST_SYSTYPE windows
 	#elif defined(__linux)||defined(__linux__)||defined(__gnu_linux__)
 		#define ST_SYSTYPE linux
