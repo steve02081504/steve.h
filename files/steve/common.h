@@ -12,6 +12,8 @@
 	nesebg
 	#if defined(__GNUC__)
 	_ste FILE*fopenf(const char*mmod,const char*filename,...)__attribute__((format(printf,2,3)));
+	#elif defined(_MSC_VER)
+	_ste FILE*fopenf(const char*mmod,_Printf_format_string_ const char*filename,...);
 	#endif
 	_ste FILE*fopenf(const char*mmod,const char*filename,...)
 	{
@@ -42,6 +44,8 @@ a:		b*=2;
 	nesebg
 	#if defined(__GNUC__)
 	_ste int systemf(const char*commd,...)__attribute__((format(printf,1,2)));
+	#elif defined(_MSC_VER)
+	_ste int systemf(_Printf_format_string_ const char*commd,...);
 	#endif
 	_ste int systemf(const char*commd,...)
 	{

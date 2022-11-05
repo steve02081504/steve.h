@@ -144,6 +144,8 @@
 		}
 		#if defined(__GNUC__)
 		_ste inline int stest_putsf(const wchar_t*message,...)nexc __attribute__((format(wprintf,1,2)));
+		#elif defined(_MSC_VER)
+		_ste inline int stest_putsf(_Printf_format_string_ const wchar_t*message,...)nexc;
 		#endif
 		_ste inline int stest_putsf(const wchar_t*message,...)nexc
 		{

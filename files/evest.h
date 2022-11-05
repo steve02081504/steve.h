@@ -108,6 +108,10 @@
 	#pragma warning(disable:26496)//const标记警告diss
 #endif
 //
+#if defined(_MSC_VER)
+	#include <sal.h>
+#endif
+//
 #define _ste
 #define _al
 //
